@@ -1,22 +1,16 @@
 CXX = g++
-CXXFLAGS = -O2 -H -std=c++17 -Wall
-OBJ = main.o 
+CXXFLAGS = -O2 -std=c++17 -Wall
+OBJ = main.o pawn.o
 SFML = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-network
 
-PCH_SRC = source/pch.hpp
-#PCH_HEADERS = 
-PCH_OUT = source/pch.hpp.gch
+INC_DIR=.
+SRC_DIR=.
 
-all: clean $(OBJ)
-	@$(CXX) $(CXXFLAGS) $(OBJ) -o 3mensMorris $(SFML)
-main.o: 
-	@g++ -c main.cpp
+NAME=3mensMorris
+
+all: $(OBJ)
+	@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME) $(SFML)
+%.o: $(SRC_DIR)/%.cpp
+	@$(CXX) $(CXXFLAGS) -c -I$(INC_DIR) $< -o $@
 clean:
-	@rm -f $(OBJ) 
-	@rm -f 3mensMorris
-pre:
-	@$(CXX) $(CXXFLAGS) $(PCH_SRC);
-	@make
-	
-	
-
+	@rm -f $(NAME) $(OBJ)
