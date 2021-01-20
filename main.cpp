@@ -1,4 +1,5 @@
 #include "libs.hpp"
+#include "pawn.hpp"
 
 int main()
 {
@@ -14,6 +15,8 @@ int main()
                              {sf::Vertex(sf::Vector2f(300,50)), sf::Vertex(sf::Vector2f(300,550)) }, // middle vertical line
                              {sf::Vertex(sf::Vector2f(50,300)), sf::Vertex(sf::Vector2f(550,300)) }  // middle horizontal line
                             };
+    Pawn pawnOne(true, sf::Vector2u(50,50));
+    Pawn pawnTwo(false, sf::Vector2u(550,550));
     while(mainWindow.isOpen())
     {
         sf::Event event;
@@ -27,6 +30,8 @@ int main()
         {
             mainWindow.draw(lines[i], 2, sf::Lines);
         }
+        pawnOne.draw(&mainWindow);
+        pawnTwo.draw(&mainWindow);
         mainWindow.display();
         
     }

@@ -3,9 +3,11 @@
 
 class Pawn
 {
-    sf::CircleShape* bodyPointer;
+    sf::CircleShape body;
     Coordinates pawnCoordinates;
     public:
-    Pawn (sf::CircleShape* initialBodyPointer, Coordinates initialPawnCoordinates): bodyPointer(initialBodyPointer), pawnCoordinates(initialPawnCoordinates) {}
+    Pawn (bool color, Coordinates initialPawnCoordinates);
+    void draw(sf::RenderWindow* targetWindow);
+    
     
 };
