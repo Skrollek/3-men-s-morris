@@ -1,6 +1,7 @@
 #pragma once 
 #include "libs.hpp"
 
+
 class Pawn
 {
     sf::CircleShape body;
@@ -8,6 +9,5 @@ class Pawn
     public:
     Pawn (bool color, Coordinates initialPawnCoordinates);
     void draw(sf::RenderWindow* targetWindow);
-    
     
 };
