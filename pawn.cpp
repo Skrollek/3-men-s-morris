@@ -36,3 +36,10 @@ Coordinates Pawn::getCoordinates()
 {
     return pawnCoordinates;
 }
+
+bool Pawn::getColor()
+{
+    if(body.getFillColor() == sf::Color::White)
+        return 1;
+    return 0;
+}

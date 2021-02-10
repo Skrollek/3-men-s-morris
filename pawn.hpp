@@ -11,4 +11,5 @@ class Pawn
     void draw(sf::RenderWindow* targetWindow); // draws pawn in window 
     void setCoordinates(Coordinates newCoordinates); // sets new coordinates and body position
     Coordinates getCoordinates(); // returns current coordinates
+    bool getColor();
 };

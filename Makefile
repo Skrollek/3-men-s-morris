@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -O2 -std=c++17 -Wall
-OBJ = main.o pawn.o player.o
+OBJ = main.o pawn.o player.o logic.o
 SFML = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-network
 
 INC_DIR=.

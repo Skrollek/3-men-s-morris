@@ -1,7 +1,7 @@
 #include "libs.hpp"
 #include "pawn.hpp"
 #include "player.hpp"
-
+#include "logic.hpp"
 void resizeView(const sf::RenderWindow *window, sf::View* view)
 {
     float aspectRatio = float(window->getSize().x) / float(window->getSize().y);
@@ -26,6 +26,7 @@ int main()
                             };
     Player whitePlayer(1);
     Player blackPlayer(0);
+    Logic mainLogic(&whitePlayer, &blackPlayer, NULL);
     bool onMove = 1; // 1 - white 0 - black
 
     int board[3][3] = {{1,-1,0},{1,-1,0},{1,-1,0}};

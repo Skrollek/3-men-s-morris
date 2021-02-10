@@ -27,3 +27,25 @@ void Player::draw(sf::RenderWindow* targetWindow)
         playerPawns[i].draw(targetWindow);
     }
 }
+
+Pawn* Player::getPawnByNumber(unsigned int index)
+{
+    if (index < 3)
+        return (playerPawns + index);
+    else return NULL;
+}
+
+Pawn* Player::getPawnByCoordinates(Coordinates targetPawnCoordiantes)
+{
+    for(int i = 0; i < 3; ++i)
+    {
+        if(playerPawns[i].getCoordinates() == targetPawnCoordiantes)
+        return (playerPawns + i);
+    }
+    return NULL;
+}
+
+bool Player::getPlayerColor()
+{
+    return playerColor;
+}
