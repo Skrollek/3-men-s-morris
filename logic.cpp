@@ -21,7 +21,7 @@ Logic :: Logic(Player* whitePlayer, Player* blackPlayer, int ** initialBoardPost
         {
             for(int y = 0; y < 3; ++y)
             {
-                logicArray[x][y] = (Pawn*)((long long)whitePlayer->getPawnByCoordinates(Coordinates(x,y)) + (long long)blackPlayer->getPawnByCoordinates(Coordinates(x,y)));
+                logicArray[x][y] = (Pawn*)((uint64_t)whitePlayer->getPawnByCoordinates(Coordinates(x,y)) + (uint64_t)blackPlayer->getPawnByCoordinates(Coordinates(x,y)));
                 if(logicArray[x][y] != NULL)
                    simplifiedLogicArray[x][y] = logicArray[x][y]->getColor();
             }
