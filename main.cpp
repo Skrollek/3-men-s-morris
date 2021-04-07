@@ -39,7 +39,15 @@ int main()
                 mainWindow.close();
             else if (event.type == sf::Event::Resized)
                 resizeView(&mainWindow, &mainView);
-
+            else if (event.type == sf::Event::MouseButtonReleased)
+            {
+                sf::Vector2f mousePostionFloat = mainWindow.mapPixelToCoords(sf::Mouse::getPosition(mainWindow));
+                sf::Vector2i mousePostion;
+                mousePostion.x = (int)mousePostionFloat.x;
+                mousePostion.y = (int)mousePostionFloat.y;
+                mainLogic.onClick(mousePostion, 1);
+                //std::cout << mousePostion.x << " " << mousePostion.y << std::endl;
+            }
         }
         mainWindow.clear(sf::Color::Black);
         mainWindow.setView(mainView);

@@ -32,3 +32,47 @@ Logic :: Logic(Player* whitePlayer, Player* blackPlayer, int ** initialBoardPost
 
     }
 }
+Logic :: Logic()
+{
+    simplifiedLogicArray = new int*[3];
+    for(int i = 0; i < 3; ++i)
+    {
+        simplifiedLogicArray[i] = new int[3] {1,-1,0};
+    }
+}
+bool Logic :: operator == (const Logic &  A)
+{
+    for(int i =0; i < 0; ++i)
+    {
+        for(int j = 0; j < 0; ++j)
+        {
+            if(A.simplifiedLogicArray[i][j] != this->simplifiedLogicArray[i][j])
+                return false;
+        }
+    }
+    return true;
+}
+
+bool Logic :: onClick(Coordinates mouseClickCoordinates, bool playerColor)
+{
+    static Pawn* currentlySelectedPawn = NULL;
+    int i = (mouseClickCoordinates.x + VIEW_SIZE/2)/VIEW_STEP - 1, j = (mouseClickCoordinates.y + VIEW_SIZE/2)/VIEW_STEP - 1;
+    std::cout << i << " " << j << std::endl;
+    if(simplifiedLogicArray[i][j] != -1)
+    {
+        currentlySelectedPawn = logicArray[i][j];
+    }
+    else if (currentlySelectedPawn != NULL)
+    {
+        if(i == currentlySelectedPawn->getCoordinates().x || j == currentlySelectedPawn->getCoordinates().y || i == currentlySelectedPawn->getCoordinates().x -currentlySelectedPawn->getCoordinates().y == i-j)
+        {
+            std::swap(logicArray[currentlySelectedPawn->getCoordinates().x][currentlySelectedPawn->getCoordinates().y], logicArray[i][j]);
+            std::swap(simplifiedLogicArray[currentlySelectedPawn->getCoordinates().x][currentlySelectedPawn->getCoordinates().y], simplifiedLogicArray[i][j]);
+            currentlySelectedPawn->setCoordinates(Coordinates(i,j));
+            return false;
+        }
+        
+    }
+    return true;
+    
+}
