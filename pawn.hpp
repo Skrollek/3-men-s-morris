@@ -12,4 +12,7 @@ class Pawn
     void setCoordinates(Coordinates newCoordinates); // sets new coordinates and body position
     Coordinates getCoordinates(); // returns current coordinates
     bool getColor();
+    const sf::Color getSFColor();
+    void setOutlineColor(sf::Color newColor);
+    void setBodyColor(sf::Color newColor);
 };

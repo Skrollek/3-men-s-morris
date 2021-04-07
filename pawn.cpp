@@ -44,3 +44,17 @@ bool Pawn::getColor()
         return 1;
     return 0;
 }
+
+void Pawn::setOutlineColor(sf::Color newColor)
+{
+    body.setOutlineColor(newColor);
+}
+
+void Pawn::setBodyColor(sf::Color newColor)
+{
+    body.setFillColor(newColor);
+}
+const sf::Color Pawn::getSFColor()
+{
+    return body.getFillColor();
+}

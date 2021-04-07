@@ -57,14 +57,16 @@ bool Logic :: onClick(Coordinates mouseClickCoordinates, bool playerColor)
 {
     static Pawn* currentlySelectedPawn = NULL;
     int i = (mouseClickCoordinates.x + VIEW_SIZE/2)/VIEW_STEP - 1, j = (mouseClickCoordinates.y + VIEW_SIZE/2)/VIEW_STEP - 1;
-    std::cout << i << " " << j << std::endl;
     if(simplifiedLogicArray[i][j] != -1)
     {
+        if(currentlySelectedPawn != NULL)
+            currentlySelectedPawn->setOutlineColor(sf::Color::White);
         currentlySelectedPawn = logicArray[i][j];
+        currentlySelectedPawn->setOutlineColor(sf::Color::Red);
     }
     else if (currentlySelectedPawn != NULL)
     {
-        if(i == currentlySelectedPawn->getCoordinates().x || j == currentlySelectedPawn->getCoordinates().y || i == currentlySelectedPawn->getCoordinates().x -currentlySelectedPawn->getCoordinates().y == i-j)
+        if(this->isMovePossible(currentlySelectedPawn->getCoordinates(), Coordinates(i,j)))
         {
             std::swap(logicArray[currentlySelectedPawn->getCoordinates().x][currentlySelectedPawn->getCoordinates().y], logicArray[i][j]);
             std::swap(simplifiedLogicArray[currentlySelectedPawn->getCoordinates().x][currentlySelectedPawn->getCoordinates().y], simplifiedLogicArray[i][j]);
@@ -75,4 +77,37 @@ bool Logic :: onClick(Coordinates mouseClickCoordinates, bool playerColor)
     }
     return true;
     
+}
+
+bool Logic::isMovePossible(const Coordinates& currentPawnCooordinates, const Coordinates& targetCoordinates)
+{
+    if(currentPawnCooordinates.x != targetCoordinates.x) // checking if pawn can move in that way.
+    {
+        if(currentPawnCooordinates.y != targetCoordinates.y)
+        {
+            int deltaPawnCoordinates = currentPawnCooordinates.y - currentPawnCooordinates.x;
+            int deltaTargetCoordinates = targetCoordinates.y - targetCoordinates.x;
+            if(deltaPawnCoordinates != 0 || deltaTargetCoordinates != 0)
+            {
+                deltaPawnCoordinates += currentPawnCooordinates.x*2;
+                deltaTargetCoordinates += targetCoordinates.x*2;
+                if(deltaPawnCoordinates != 2 || deltaTargetCoordinates != 2)
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    int deltaCoordinatesX = std::abs(currentPawnCooordinates.x - targetCoordinates.x);
+    int deltaCoordinatesY = std::abs(currentPawnCooordinates.y - targetCoordinates.y);
+    if(deltaCoordinatesX > 1 || deltaCoordinatesY > 1) // checking if there is another pawn in the way
+    {
+        int middleCoordinatesX = (currentPawnCooordinates.x + targetCoordinates.x)/2;
+        int middleCoordinatesY = (currentPawnCooordinates.y + targetCoordinates.y)/2;
+        if(simplifiedLogicArray[middleCoordinatesX][middleCoordinatesY] != -1)
+        {
+            return false;
+        }
+    }
+    return true;
 }

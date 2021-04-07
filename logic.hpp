@@ -11,4 +11,6 @@ class Logic
     Logic(); // creates default board. Not to be used to initialize a board. But it can be used to compare if current state of board is equal to initial state.
     bool onClick(Coordinates mouseClickCoordinates, bool playerColor);
     bool operator == (const Logic &  A);
+    bool isMovePossible(const Coordinates& currentPawnCooordinates, const Coordinates& targetCoordinates);
+    char isCurrentPositionWinning();
 };
